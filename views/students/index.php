@@ -68,7 +68,7 @@
                             <a
                                 href="index.php?action=delete&id=<?= $student['id'] ?>"
                                 class="btn btn--sm btn--danger"
-                                onclick="return confirm('Pakka delete karna hai? 🗑️')">Delete</a>
+                                onclick="return confirm('Are Your Sure? 🗑️')">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

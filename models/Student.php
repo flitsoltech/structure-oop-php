@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/Database.php';
- 
+
 interface CRUDInterface
 {
     public function getAll(): array;
@@ -10,7 +10,7 @@ interface CRUDInterface
     public function update(int $id, array $data): bool;
     public function delete(int $id): bool;
 }
- 
+
 abstract class BaseModel
 {
     protected mysqli $db;
@@ -20,7 +20,7 @@ abstract class BaseModel
     {
         $this->db = Database::getInstance()->getConnection();
     }
- 
+
     protected function runQuery(string $sql, string $types = '', array $params = []): mysqli_stmt|false
     {
         $stmt = $this->db->prepare($sql);
@@ -33,7 +33,7 @@ abstract class BaseModel
         $stmt->execute();
         return $stmt;
     }
- 
+
     protected function fetchAll(string $sql, string $types = '', array $params = []): array
     {
         $stmt = $this->runQuery($sql, $types, $params);
@@ -41,7 +41,7 @@ abstract class BaseModel
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
- 
+
     protected function fetchOne(string $sql, string $types = '', array $params = []): ?array
     {
         $stmt = $this->runQuery($sql, $types, $params);
@@ -50,14 +50,14 @@ abstract class BaseModel
         $row    = $result->fetch_assoc();
         return $row ?: null;
     }
- 
+
     protected function execute(string $sql, string $types = '', array $params = []): bool
     {
         $stmt = $this->runQuery($sql, $types, $params);
         return $stmt !== false;
     }
 }
- 
+
 class Student extends BaseModel implements CRUDInterface
 {
 
@@ -72,7 +72,7 @@ class Student extends BaseModel implements CRUDInterface
         parent::__construct();
         $this->table = 'students';
     }
- 
+
     public function getName(): string
     {
         return $this->name;
@@ -89,7 +89,7 @@ class Student extends BaseModel implements CRUDInterface
     {
         return $this->age;
     }
- 
+
     public function setName(string $name): void
     {
         $this->name   = trim($name);
@@ -105,7 +105,7 @@ class Student extends BaseModel implements CRUDInterface
     public function setAge(int $age): void
     {
         $this->age    = $age;
-    } 
+    }
 
     public function getAll(): array
     {
@@ -152,7 +152,7 @@ class Student extends BaseModel implements CRUDInterface
             [$id]
         );
     }
- 
+
     public function search(string $keyword): array
     {
         $kw = "%{$keyword}%";

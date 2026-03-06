@@ -46,8 +46,7 @@ class StudentController
             }
         }
     }
-
-    // ✅ Edit form dikhao
+ 
     public function edit(): void
     {
         $id      = (int)($_GET['id'] ?? 0);
@@ -59,8 +58,7 @@ class StudentController
 
         require_once __DIR__ . '/../views/students/edit.php';
     }
-
-    // ✅ Update karo
+ 
     public function update(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -79,18 +77,14 @@ class StudentController
                 $this->redirect('?action=index&msg=updated');
             }
         }
-    }
-
-    // ✅ Delete karo
+    } 
     public function delete(): void
     {
         $id = (int)($_GET['id'] ?? 0);
         if ($this->studentModel->delete($id)) {
             $this->redirect('?action=index&msg=deleted');
         }
-    }
-
-    // --- Private Helpers ---
+    } 
 
     private function sanitize(array $data): array
     {

@@ -34,8 +34,7 @@ class Database {
     public function getConnection(): mysqli {
         return $this->connection;
     }
-
-    // Clone aur unserialize band karo
+ 
     private function __clone() {}
     public function __wakeup() {}
 
